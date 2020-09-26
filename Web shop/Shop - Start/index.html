@@ -1,35 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Web-Store</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src = "https://kit.fontawesome.com/3ba72a1ebd.js" crossorigin = "anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="Fonts/font/flaticon.css" >
-    <link rel="stylesheet" media="screen" href="css/bootstrap-overrides.css">
-    <link rel="stylesheet" media="screen" href="css/index.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/3ba72a1ebd.js" crossorigin="anonymous"></script>
+  
+    <link rel="stylesheet" type="text/css" href="Fonts/font/flaticon.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="css/bootstrap-overrides.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="css/index.css"
+    />
+  </head>
 
-<body>
-    <div data-include-html="html/partials/nav-top.html"></div>
-    <div data-include-html="html/partials/nav-middle.html"></div>
-    <!-- <div data-include-html="html/partials/home-breadcrumb.html"></div>  -->
-    <div data-include-html="html/partials/home-container.html"></div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script><!-- https://github.com/axios/axios -->
-    <script src="js/constants.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/shoppingCart.js"></script>
-    <script src="js/loadCategoryProducts.js"></script>
-    <script src="js/loadCategories.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/favorites.js"></script>
-    <script src="js/includeHTML.js"></script>
-    <script src="js/index.js"></script> 
-</body>
+  <body>
+    <!-- Nav-Bar-top-with social icons -->
+   
+      <header class="navbar bg-dark py-2 px-0">
+        <!-- customers-drop-down -->
+        <div class="d-sm-none my-1 ml-4 pr-lg-2">
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text no-border-radius">
+                <img src="./icons/person-24px.svg" />
+              </span>
+            </div>
+            <select
+              class="form-control no-border-radius"
+              id="person-select"
+              onchange="onSelectedCustomer(event)"
+            >
+              <!-- Customers-api -->
+            </select>
+          </div>
+        </div>
+        <!-- mobile-user -->
+        <div class="d-none d-md-none d-small-block ml-1">
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="no-border-radius">
+                <img class="bg-light ml-1 pt-1" src="./icons/person-24px.svg" />
+                <select
+                  class="bg-light pb-1"
+                  id="person-mobile-user"
+                  onchange="onSelectedCustomer(event)"
+                >
+                 <!-- mobile user api -->
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- contact info-->
+        <div>
+          <ul class="list-inline ml-2 mb-0 d-none d-lg-inline-block">
+            <li class="list-inline-item opacity-75 mr-2">
+              <i class="text-light mr-2 fas fa-phone-alt"></i
+              ><a
+                class="text-light font-size-sm py-1 pl-0 pr-2"
+                href="tel:00331697720"
+                >00 11 222 3344</a
+              >
+            </li>
+            <li class="list-inline-item opacity-75 mr-2">
+              <i class="text-light mr-2 fas fa-envelope"></i
+              ><a
+                class="text-light font-size-sm py-1 pl-0 pr-2"
+                href="mailto:info@mystore.com"
+                >info@mystore.com</a
+              >
+            </li>
+          </ul>
+        </div>
 
+        <!-- social bar  -->
+        <div class="d-flex flex-nowrap mr-4">
+          <a class="social-btn sb-facebook text-light" href="#">
+            <i class="flaticon-facebook-logo"></i
+            ><span class="sr-only">Facebook</span></a
+          >
+          <a class="social-btn sb-twitter text-light" href="#"
+            ><i class="flaticon-twitter"></i>
+            <span class="sr-only">Twitter</span></a
+          ><a class="social-btn sb-instagram text-light" href="#">
+            <i class="flaticon-instagram"></i
+            ><span class="sr-only">Instagram</span> </a
+          ><a class="social-btn sb-pinterest text-light" href="#">
+            <i class="flaticon-pinterest"></i
+            ><span class="sr-only">Pinterest</span></a
+          >
+        </div>
+      </header>
+    
+    <!-- NAV-BAR -MIDDLE with shopping cart, search bar and brand logo -->
+   
+      <section class="navbar navbar-expand-lg navbar-light bg-light px-0">
+        <div class="container-fluid flex-sm-nowrap px-3">
+          <!-- Navbar Brand-->
+          <a
+            class="navbar-brand mr-0 mr-sm-4"
+            style="min-width: 100px"
+            href="index.html"
+          >
+            <img width="100" src="images/logo/logo.png" alt="My Store"
+          /></a>
+
+          <!-- Navbar Buttons-->
+          <div class="navbar-btns d-flex position-relative order-sm-3">
+            <!-- Favorites Button -->
+            <a
+              class="navbar-btn bg-0 my-3"
+              href="#"
+              onclick="getFavorites(event)"
+            >
+              <img
+                class="mx-auto mb-1 fas fa-list-ol"
+                style="width: 27px; height: auto"
+                src="./icons/favorite-24px.svg"
+                alt="Favorites"
+              />Favorites
+            </a>
+
+            <!-- Shopping Cart Button -->
+            <a
+              class="navbar-btn bg-0 my-3"
+              id="shopping-bag"
+              onclick="loadCart();"
+            >
+            </a>
+          </div>
+
+          <!-- search-box -->
+          <div class="flex-grow-1 pb-3 pt-sm-3 my-1 px-sm-2 pr-lg-4 order-sm-2">
+            <div class="input-group flex-nowrap">
+              <div
+                class="input-group-prepend cursor-pointer"
+                onclick="search(event)"
+              >
+                <span class="input-group-text no-border-radius" id="search-icon"
+                  ><i class="fas fa-search"></i
+                ></span>
+              </div>
+              <input
+                class="form-control no-border-radius"
+                type="text"
+                onkeyup="search(event)"
+                id="product-search"
+                placeholder="Search products"
+                aria-label="Search site"
+                aria-describedby="search-icon"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    
+    <!-- Categories list and product list -->
+    <section class="container-fluid justify-content-around mt-4 pt-lg-2 mb-4 mb-md-5">
+            <div class="row">
+                <!-- Categories -->
+                <div class="col-lg-3 my-4 py-2 d-lg-block">
+                    <div>
+                    <div class="border px-4 py-1">
+                        <ul id="categories-ui" class="list-unstyled mb-0">
+                        <!-- categories api -->
+                        
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="col-lg-9 mt-4">
+                    <div>
+                        <section id="product-api" class="container-grid justify-content-between">
+                        <!-- product api -->
+                       <!--  <div class="card mr-3 mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img
+                                src="${element.Url}"
+                                class="card-img"
+                                alt=""
+                            />
+                            <span
+                                class="product-sale-label badge badge-success no-border-radius"
+                                >${element.PercentOff}% Off</span
+                            >
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${element.Product}</h5>
+                                <span class="product-category text-muted"
+                                >Product Category 1</span
+                                >
+                                <p class="product-category text-muted">${element.Price}</p>
+                                <p class="card-text mb-4">${element.Description}</p>
+
+                                <a
+                                productId="1"
+                                class="wishlist-btn product-btn ml-2"
+                                href="#"
+                                onclick="favorite(event, 1)"
+                                >
+                                <img src="./icons/favorite-24px.svg" alt="Wishlist" />
+                                <span class="sr-only">Wishlist</span>
+                                </a>
+
+                                <span class="product-footer">
+                                <span class="product-buttons">
+                                    <a
+                                    productId="1"
+                                    class="product-btn"
+                                    href="#"
+                                    onclick="addToCart(1)"
+                                    >
+                                    <img
+                                        src="./icons/add_shopping_cart-24px.svg"
+                                        alt="Shopping cart"
+                                    />
+                                    <span class="sr-only">Shopping Cart</span>
+                                    </a>
+                                
+                                </span>
+                                <span class="product-stars">
+                                    <span class="product-review-median">4</span>
+                                    <img
+                                    src="./icons/star_border-24px.svg"
+                                    alt="Review Result"
+                                    />
+                                </span>
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+ -->
+                        
+                        </section>
+                    </div>
+                </div>
+            </div>
+      </section>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script type="text/javascript" src="js/storage.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/shoppingCart.js"></script>
+    <script type="text/javascript" src="js/loadCategoryProducts.js"></script>
+    <script type="text/javascript" src="js/loadCategories.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/favorites.js"></script>
+  </body>
 </html>
