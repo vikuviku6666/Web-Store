@@ -1,10 +1,12 @@
-
 let categoriesUi = document.querySelector("#categories-ui");
 let personMobileUser = document.querySelector("#person-mobile-user");
 categoriesUi.innerHTML = "";
 personMobileUser.innerHTML = "";
-ulOnClick = function(event) {
-    try {
+
+
+OnUlClick = function(event) {
+  try {
+    loadCategoryProducts();
     }
     catch(err){ console.log("loadCategoryProducts: ERROR", err, event);}
 }
@@ -30,7 +32,7 @@ ulOnClick = function(event) {
         }
         }
     
-        async function getCustomersUsers() {
+    async function getCustomersUsers() {
             try {
               const result = axios.get(
                 `https://webstoretostockholm.azurewebsites.net/api/customers`
