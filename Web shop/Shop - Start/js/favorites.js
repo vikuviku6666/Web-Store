@@ -1,17 +1,16 @@
 getFavorites = async (event) => {
- /*  if (event == MouseEvent) { */
-    try {
-      event.preventDefault(); 
-      let productsDiv = document.getElementById("product-api");
-      lastAction = action.FAVORITES;
-      let result = axios.get(
-        `https://webstoretostockholm.azurewebsites.net/api/FavoritesByCustomerId/1`
-      );
-        const { data: favorites } = await result;
-        console.log("getFavorites -> favorites ", favorites )
-        favorites.forEach((element) => {
-            productsDiv.innerHTML += 
-            `
+  /*  if (event == MouseEvent) { */
+  try {
+    event.preventDefault();
+    let productsDiv = document.getElementById("product-api");
+    lastAction = action.FAVORITES;
+    let result = axios.get(
+      `https://webstoretostockholm.azurewebsites.net/api/FavoritesByCustomerId/1`
+    );
+    const { data: favorites } = await result;
+    console.log("getFavorites -> favorites ", favorites);
+    favorites.forEach((element) => {
+      productsDiv.innerHTML += `
             <div class="card mr-3 mb-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
@@ -75,16 +74,14 @@ getFavorites = async (event) => {
             </div>
             </div>
             `;
-      });
-    } catch (err) {
-      console.log("getFavorites: Error", err, event);
-    }
-  
+    });
+  } catch (err) {
+    console.log("getFavorites: Error", err, event);
+  }
 };
 
 favorite = async (event, productId) => {
-    try {
-      
+  try {
   } catch (err) {
     console.log("favorite: Error", err, event, productId);
   }

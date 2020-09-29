@@ -18,7 +18,6 @@ async function getCustomers() {
   displayBasicCart();
   loadCategories();
   createProductCard();
- 
 }
 
 getCustomers();
