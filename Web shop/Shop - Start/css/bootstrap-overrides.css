@@ -96,7 +96,7 @@ a {
 
 .navbar-expand-lg .navbar-btns .navbar-btn {
     width: 80px;
-    border-left: 1px solid #e7e7e7;
+  /*   border-left: 1px solid #e7e7e7; */
 }
 
 .bg-secondary {
