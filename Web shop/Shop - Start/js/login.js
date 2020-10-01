@@ -9,7 +9,7 @@ async function getCustomers() {
     const { data: customer } = await result;
     localStorage.CustomerId = customer[0].Id;
     customer.forEach((element) => {
-      personSelect.innerHTML += `<option customer-id=element>${element.FirstName} ${element.LastName}</option>`;
+      personSelect.innerHTML += `<option data-set=${element.Id}>${element.FirstName} ${element.LastName}</option>`;
     });
   } catch (err) {
     console.log("getCustomers: ERROR", err);
@@ -23,9 +23,13 @@ async function getCustomers() {
 getCustomers();
 
 onSelectedCustomer = (event) => {
+  console.log("onSelectedCustomer -> event", event)
+  let selectedCustomer = event.target.value;
+  console.log("onSelectedCustomer -> selectedCustomer", selectedCustomer)
   try {
-    displayBasicCart();
-    loadCategoryProducts();
+    localStorage.CustomerId = selectedCustomer;
+   /*  displayBasicCart();
+    loadCategoryProducts(); */
   } catch (err) {
     console.log("onSelectedCustomer: ERROR", err, event);
   }

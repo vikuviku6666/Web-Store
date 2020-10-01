@@ -100,7 +100,7 @@
           lastAction = action.CATEGORY;
           /*  let selectedCategoryId =  */
           let result = axios.get(
-            `https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${categoryId}&customerId=${localStorage.customerId}`
+            `https://webstoretostockholm.azurewebsites.net/api/Products/1`
           );
           const { data: favorites } = await result;
           console.log("getFavorites -> favorites ", favorites);
