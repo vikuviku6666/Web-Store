@@ -3,7 +3,7 @@ shoppingBag.innerHTML = "";
 
 async function displayBasicCart() {
   try {
-    const customerId = localStorage.getItem("CustomerId");
+    const customerId = localStorage.CustomerId;
     const result = axios.get(
       `https://webstoretostockholm.azurewebsites.net/api/cart/${customerId}`
     );
@@ -29,25 +29,20 @@ basicCart = async () => {
   }
 };
 
-addToCart = async (productId) => {
-  axios
-    .post(
-      "https://webstoretostockholm.azurewebsites.net/api/CartProducts",
-      `{
-      
-        "CustomerId": parseInt(customerId),
-        "ProductId": parseInt(productId),
-        "Count": 1
-    
-    }`
-    )
-    .then(function (response) {
-      displayBasicCart();
+addToCart = async (Id) => {
+ axios.post('https://webstoretostockholm.azurewebsites.net/api/CartProducts', 
+    {
+      CustomerId: localStorage.CustomerId,
+      ProductId: Id,
+      Count: 1
     })
-    .catch(function (error) {
-      console.log("addToCart: Error", error, productId);
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error,Id);
     });
-};
+    
+}
 
 createCartItem = (cartItem) => {
   try {

@@ -9,7 +9,7 @@ async function getCustomers() {
     const { data: customer } = await result;
     localStorage.CustomerId = customer[0].Id;
     customer.forEach((element) => {
-      personSelect.innerHTML += `<option >${element.FirstName} ${element.LastName}</option>`;
+      personSelect.innerHTML += `<option customer-id=element>${element.FirstName} ${element.LastName}</option>`;
     });
   } catch (err) {
     console.log("getCustomers: ERROR", err);
