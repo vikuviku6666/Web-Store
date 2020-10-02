@@ -5,17 +5,10 @@ getFavorites = async (event) => {
       event.preventDefault();
       let productsDiv = document.getElementById("product-api");
       lastAction = action.FAVORITES;
-      const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=1&customerId=${localStorage.CustomerId}`);
+      const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${localStorage.CategoryId}&customerId=${localStorage.CustomerId}`);
       const { data: products } = await result;
       console.log("getFavorites -> products ", products )
-      let favorites = [];
-      console.log("getFavorites -> favorites", favorites)
-      products.map((element) => {
-        if(element.IsFavorite > 0){
-          favorites.push('element');
-       }
-      });
-      
+      const favorites = products.filter(product => product.IsFavorite > 0);
       productsDiv.innerHTML = `${favorites.map(productTemplate).join(" ")}`
     }
     catch (err) {
