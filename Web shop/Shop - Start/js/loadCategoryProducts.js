@@ -87,7 +87,7 @@
       loadCategoryProducts = async (Id) => {
         try {
           lastAction = action.CATEGORY;
-          const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${Id}&customerId=${localStorage.CustomerId}`);
+          const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${localStorage.CategoryId}&customerId=${localStorage.CustomerId}`);
           const { data: products } = await result;
           productApi.innerHTML = `${products.map(productTemplate).join(" ")}`
         } catch (err) {

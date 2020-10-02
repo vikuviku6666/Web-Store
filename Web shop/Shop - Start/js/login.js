@@ -30,7 +30,7 @@ onSelectedCustomer = (event) => {
     localStorage.CustomerId = selectedCustomer;
    basicCart(localStorage.CustomerId);
    favoritesCounts(localStorage.CustomerId);
-    loadCategoryProducts();
+  loadCategoryProducts(localStorage.CustomerId);
   } catch (err) {
     console.log("onSelectedCustomer: ERROR", err, selectedCustomer);
   }

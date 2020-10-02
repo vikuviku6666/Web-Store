@@ -82,10 +82,10 @@ getFavorites = async (event) => {
 
 
 
-favoritesCounts = async () => {
+favoritesCounts = async (Id) => {
   try {
     let productsCounts = document.getElementById("favorite-count");
-    const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/favorites/${localStorage.CustomerId}`);
+    const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/favorites/${Id}`);
     const { data: products } = await result;
    
     const favoritesCount = products.length;
