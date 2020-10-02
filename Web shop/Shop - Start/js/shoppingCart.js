@@ -19,8 +19,7 @@ shoppingBag.innerHTML = "";
       const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/cart/${localStorage.CustomerId}`);
       const { data: products } = await result;
       shoppingBag.innerHTML = `${products.map(displayBasicCart).join(" ")}`
-    /*  displayBasicCart(Id); */
-    } catch (err) {
+   } catch (err) {
       console.log("basicCart: Error", err);
     }
   }

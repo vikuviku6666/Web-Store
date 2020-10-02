@@ -7,7 +7,7 @@ search = async (event) => {
     let searchTerm = productSearch;
     lastAction = action.SEARCH;
     const result = axios.get(
-      `https://webstoretostockholm.azurewebsites.net/api/searchproducts?search=${searchTerm}&customerId=${localStorage.CustomerId}`
+      `https://webstoretostockholm.azurewebsites.net/api/searchproducts?customerId=${localStorage.CustomerId}&search=${searchTerm}`
     );
     const { data: products } = await result;
     productsDiv.innerHTML = `${products.map(productTemplate).join(" ")}`

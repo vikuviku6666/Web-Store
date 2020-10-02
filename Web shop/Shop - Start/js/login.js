@@ -17,6 +17,7 @@ async function getCustomers() {
   }
   getCustomersUsers();
   basicCart(localStorage.CustomerId);
+  favoritesCounts(localStorage.CustomerId);
   loadCategories();
   loadCategoryProducts(localStorage.CategoryId);
 }
@@ -27,7 +28,8 @@ onSelectedCustomer = (event) => {
   let selectedCustomer = event.target.value;
  try {
     localStorage.CustomerId = selectedCustomer;
-    basicCart(localStorage.CustomerId);
+   basicCart(localStorage.CustomerId);
+   favoritesCounts(localStorage.CustomerId);
     loadCategoryProducts();
   } catch (err) {
     console.log("onSelectedCustomer: ERROR", err, selectedCustomer);
