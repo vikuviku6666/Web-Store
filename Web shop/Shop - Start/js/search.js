@@ -1,21 +1,22 @@
 search = async (event) => {
+  if (event === MouseEvent || KeyboardEvent) { 
   try {
     event.preventDefault();
     let productsDiv = document.getElementById("product-api");
-    let productSearch = document.getElementById("product-search");
-    let lastAction = action.SEARCH;
-    let searchTerm = productSearch.innerText;
+    let productSearch = document.getElementById("product-searched").value;
+    let searchTerm = productSearch;
+    lastAction = action.SEARCH;
     const result = axios.get(
-      `https://webstoretostockholm.azurewebsites.net/api/Products`
+      `https://webstoretostockholm.azurewebsites.net/api/searchproducts?search=${searchTerm}&customerId=${localStorage.CustomerId}`
     );
     const { data: products } = await result;
-    products.forEach((element) => {
-      productsDiv.innerHTML += `
-              createProductCard();
-             `;
-      localStorage.CartTotal = element.Total;
-    });
-  } catch (err) {
-    console.log("loadCategoryProducts: Error", err, event);
+    productsDiv.innerHTML = `${products.map(productTemplate).join(" ")}`
   }
+  catch (err) {
+    console.log("SearchProducts: Error", err);
+  }
+}
 };
+   
+      
+    

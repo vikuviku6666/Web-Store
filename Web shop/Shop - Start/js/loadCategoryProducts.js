@@ -10,7 +10,6 @@
         } 
       }
       function productTemplate(element){
-      console.log("productTemplate -> element", element)
       return `
       <div class="card mr-3 mb-3">
         <div class="row no-gutters">
@@ -37,7 +36,7 @@
                 href="#"
                 onclick="favorite(event, ${element.ProductId})"
               >
-                <img src="./icons/favorite-24px.svg" alt="Wishlist" id="favorites-img"> </img>
+                <img src=${ element.IsFavorite > 0 ? "./icons/favorite-24px.svg" : "./icons/favorite_border-24px.svg" } alt="Wishlist" id="favorites-img"> </img>
                 <span class="sr-only">Wishlist</span>
               </a>
 
@@ -73,44 +72,26 @@
       }
 
   
-        /* let heart = document.createElement("img");
-          const isFavorite = true;
-          console.log("createProductCard -> heart", heart)
-          
-          if(isFavorite === true){
-            
-            heart.src = "./icons/favorite-24px.svg";   
-          }else {
-            heart.src = "./icons/favorite_border-24px.svg";
-          } */
-      createProductCard = async (product) => {
+        
+      createProductCard = async () => {
       try {
-      const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products/1`);
+     /*  const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${Id}&customerId=${localStorage.CustomerId}`);
       const { data: products } = await result;
-      productApi.innerHTML = `${products.map(productTemplate).join(" ")}`
+      productApi.innerHTML = `${products.map(productTemplate).join(" ")}` */
       } catch (err) {
         console.log("createProductCard: ERROR", err);
       }
       };
      
 
-      loadCategoryProducts = async (categoryId) => {
+      loadCategoryProducts = async (Id) => {
         try {
-          let productsDiv = document.getElementById("product-api");
           lastAction = action.CATEGORY;
-          /*  let selectedCategoryId =  */
-          let result = axios.get(
-            `https://webstoretostockholm.azurewebsites.net/api/Products/1`
-          );
-          const { data: favorites } = await result;
-          console.log("getFavorites -> favorites ", favorites);
-          favorites.forEach((element) => {
-            productsDiv.innerHTML += 
-                    createProductCard(element); 
-                      ;
-          });
+          const result = axios.get(`https://webstoretostockholm.azurewebsites.net/api/Products?categoryId=${Id}&customerId=${localStorage.CustomerId}`);
+          const { data: products } = await result;
+          productApi.innerHTML = `${products.map(productTemplate).join(" ")}`
         } catch (err) {
-          console.log("loadCategoryProducts: ERROR", err, categoryId);
+          console.log("loadCategoryProducts: ERROR", err, Id );
         }
 
       };

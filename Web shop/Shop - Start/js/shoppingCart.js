@@ -1,9 +1,9 @@
 let shoppingBag = document.querySelector("#shopping-bag");
 shoppingBag.innerHTML = "";
 
-async function displayBasicCart() {
+async function displayBasicCart(customerId) {
   try {
-    const customerId = localStorage.CustomerId;
+  /*   const customerId = localStorage.CustomerId; */
     const result = axios.get(
       `https://webstoretostockholm.azurewebsites.net/api/cart/${customerId}`
     );
@@ -22,8 +22,9 @@ async function displayBasicCart() {
   }
 }
 
-basicCart = async () => {
+basicCart = async (Id) => {
   try {
+    displayBasicCart(Id);
   } catch (err) {
     console.log("basicCart: Error", err);
   }
@@ -41,47 +42,6 @@ addToCart = async (Id) => {
     }, (error) => {
       console.log(error,Id);
     });
-    
+  basicCart();
 }
 
-createCartItem = (cartItem) => {
-  try {
-  } catch (err) {
-    console.log("createCartItem: ERROR", err, cartItem);
-  }
-};
-
-displayCartItems = () => {
-  try {
-  } catch (err) {
-    console.log("displayCartItems: ERROR", err);
-  }
-};
-
-loadCart = async () => {
-  try {
-  } catch (err) {
-    console.log("loadCart: ERROR", err);
-  }
-};
-
-updateQuantity = async (event, productId) => {
-  try {
-  } catch (err) {
-    console.log("updateQuantity: ERROR", err, event, productId);
-  }
-};
-
-UpdateCart = async (productId) => {
-  try {
-  } catch (err) {
-    console.log("UpdateCart: ERROR", err, productId);
-  }
-};
-
-DeleteProductFromCart = async (productId) => {
-  try {
-  } catch (err) {
-    console.log("DeleteProductFromCart: ERROR", err, productId);
-  }
-};
