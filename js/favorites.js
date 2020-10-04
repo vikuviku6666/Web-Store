@@ -16,7 +16,7 @@
           <span class="product-category text-muted"
           >${element.Category}
           </span>
-          <p class="product-category text-muted">${element.Price}</p>
+          <p class="product-category text-muted">$${element.Price}</p>
           <p class="card-text mb-4">${element.Description}</p>
                               
 
@@ -47,7 +47,7 @@
                               
             </span>
             <span class="product-stars">
-              <span class="product-review-median">${element.Stars}</span>
+              <span class="product-review-median">${element.Stars1}</span>
               <img
                 src="./icons/star_border-24px.svg"
                 alt="Review Result"
@@ -60,7 +60,7 @@
   </div>
   `
   }
-
+/* get favorites */
 getFavorites = async (event) => {
   if (event === MouseEvent || KeyboardEvent) {
    
@@ -80,7 +80,7 @@ getFavorites = async (event) => {
 
 
 
-
+/* Favorites count top bar */
 
 favoritesCounts = async (Id) => {
   try {
@@ -102,13 +102,44 @@ favoritesCounts = async (Id) => {
  
    
       
-
-favorite = async (event, productId) => {
+/* favorites adding and deleting */
+favoriteDelete = async (event, productId) => {
   if (event === MouseEvent || KeyboardEvent) {
-   
-    try {
-    } catch (err) {
-      console.log("favorite: Error", err, event, productId);
-    }
+    event.preventDefault();
+    let favoriteButton = document.getElementById('favorite-button');
+    axios.delete(`https://webstoretostockholm.azurewebsites.net/api/Favorites?ProductId=${productId}&customerId=${localStorage.CustomerId}`)
+    .then((response) => {
+      console.log(response);
+      favoritesCounts(localStorage.CustomerId);
+
+    }, (error) => {
+      console.log(error,productId);
+    });
+    
   }
-};
+
+
+}
+
+favoritePost = async (event, productId) => {
+  if (event === MouseEvent || KeyboardEvent) {
+    event.preventDefault();
+     let favoriteButton = document.getElementById('favorite-button');
+    axios.post('https://webstoretostockholm.azurewebsites.net/api/Favorites',
+      {
+        ProductId: productId,
+        CustomerId: localStorage.CustomerId
+      })
+      .then((response) => {
+        console.log(response);
+      favoritesCounts(localStorage.CustomerId);
+
+      }, (error) => {
+          console.log(error, productId);
+      favoritesCounts(localStorage.CustomerId);
+          
+      });
+  }
+
+    
+  }
