@@ -106,13 +106,13 @@ favoritesCounts = async (Id) => {
 favoriteDelete = async (event, productId) => {
   if (event === MouseEvent || KeyboardEvent) {
     event.preventDefault();
-    let favoriteButton = document.getElementById('favorite-button');
+    let favoriteButton = document.getElementById("favorites-img");
     axios.delete(`https://webstoretostockholm.azurewebsites.net/api/Favorites?ProductId=${productId}&customerId=${localStorage.CustomerId}`)
-    .then((response) => {
+      .then((response) => {
       console.log(response);
+      favoriteButton.src = "./icons/favorite_border-24px.svg";
       favoritesCounts(localStorage.CustomerId);
-
-    }, (error) => {
+      }, (error) => {
       console.log(error,productId);
     });
     
@@ -124,7 +124,7 @@ favoriteDelete = async (event, productId) => {
 favoritePost = async (event, productId) => {
   if (event === MouseEvent || KeyboardEvent) {
     event.preventDefault();
-     let favoriteButton = document.getElementById('favorite-button');
+     let favoriteButton = document.getElementById("favorites-img");
     axios.post('https://webstoretostockholm.azurewebsites.net/api/Favorites',
       {
         ProductId: productId,
@@ -132,12 +132,15 @@ favoritePost = async (event, productId) => {
       })
       .then((response) => {
         console.log(response);
-      favoritesCounts(localStorage.CustomerId);
+        favoriteButton.src = "./icons/favorite-24px.svg";
+        favoritesCounts(localStorage.CustomerId);
+       
 
       }, (error) => {
           console.log(error, productId);
+          favoriteButton.src = "./icons/favorite-24px.svg";
       favoritesCounts(localStorage.CustomerId);
-          
+     
       });
   }
 

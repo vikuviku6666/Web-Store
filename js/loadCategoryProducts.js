@@ -8,11 +8,18 @@
           <span class="product-sale-label badge badge-success no-border-radius">${percentOff}% Off</span>
           `
         } 
-      }
+}
+function favoriteImg(image) {
+  return `
+  <img src=${image > 0 ? "./icons/favorite-24px.svg" : "./icons/favorite_border-24px.svg"  } alt="Wishlist" id="favorites-img"> </img>
+
+  `
+}
       
-    function productTemplate(element) {
+function productTemplate(element) {
+ 
       function favoriteTo(favorite) {
-        if(favorite > 0){ 
+       if(favorite > 0){ 
           return`
           onclick="favoriteDelete(event, ${element.Id})" 
           `
@@ -23,6 +30,7 @@
           
         }
       } 
+    
           return `
           <div class="card mr-3 mb-3">
             <div class="row no-gutters">
@@ -50,8 +58,8 @@
                     id="favorite-button"
                     ${favoriteTo(element.IsFavorite)}
                   >
-
-                    <img src=${element.IsFavorite > 0 ? "./icons/favorite-24px.svg" : "./icons/favorite_border-24px.svg" } alt="Wishlist" id="favorites-img"> </img>
+                  <img src=${element.IsFavorite > 0 ? "./icons/favorite-24px.svg" : "./icons/favorite_border-24px.svg"  } alt="Wishlist" id="favorites-img"> </img>
+                    
                     <span class="sr-only">Wishlist</span>
                   </a>
 
